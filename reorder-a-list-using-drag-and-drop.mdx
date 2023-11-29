@@ -5,21 +5,21 @@ description: "Learn how to create a sortable list with drag handles in React.js 
 tags: ["React.js", "Dnd-kit"]
 ---
 
-Dragging and dropping items is a common user interaction pattern that can greatly enhance the user experience in web applications. When it comes to building sortable lists with drag handles in React.js, the Dnd-kit library provides a powerful and flexible solution.
+Dragging and dropping items is a common user interaction pattern that can greatly enhance the user experience in web applications. When building sortable lists with drag handles in React.js, the Dnd-kit library provides a powerful and flexible solution.
 
 ## Getting Started
-In this post, you will see how to accomplish this in a simple react component but also in a complex form that uses react hook form.
+In this post, you will see how to accomplish this in a simple react component and also in a complex form that uses react hook form.
 For the complex part, I will build the sortable list in an already existing invoice generator app.
 
 ## Installing Dnd-kit library
-Dnd-kit is a modern drag-and-drop library for React that makes it easy to implement complex drag-and-drop interfaces. Before we dive into building our sortable list, let's make sure we have Dnd-kit installed in our project:
+Dnd-kit is a modern drag-and-drop library for React, making it easy to implement complex drag-and-drop interfaces. Before we dive into building our sortable list, let's make sure we have Dnd-kit installed in our project:
 
 ```bash
 npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
 ```
 ## Implementation
 ### Simple Implementation
-Lets assume we have 2 components: Items (array of products) and SingleItem. In items component you map over the products and put the single item inside like this:
+Let's assume we have 2 components: Items (array of products) and SingleItem. In the items component you map over the products and put the single item inside like this:
 
 ```tsx
 const Items = () => {
@@ -140,19 +140,19 @@ const SingleItem = ({product}) => {
             {/* Drag and Drop grip button. */}
             <div ref={setNodeRef} {...listeners}>
 
-                {/* This is an icon from lucide icons */}
+                {/* This is an icon from Lucide icons */}
                 <GripVertical /> 
             </div>
         </div>
     )
 }
 ```
-Parameter "id" inside useSortable has to be a unique identifier for this product
+The parameter `id` inside useSortable has to be a unique identifier for this product
 
 ### Complex Implementation inside an invoice generation app using react-hook-form
 Again, let's assume we have 2 components: Items and SingleItem.
 
-Unlike the simple implementation, let's say we get the products from a `useFieldArray` method like this:
+Unlike the simple implementation, let's say we get the products from a `useFieldArray` method from react-hook-form like this:
 
 ```tsx
 const { products, append, remove, move } = useFieldArray({
@@ -163,7 +163,7 @@ const { products, append, remove, move } = useFieldArray({
 
 This method is useful when you have an array of things inside a form that you need to keep track of.
 
-The append and remove functions are optional, but in my case they are used to add or remove certain items from the invoice:
+The append and remove functions are optional, but in this case, they are used to add or remove certain items from the invoice:
 
 ```tsx
 const addNewField = () => {
@@ -185,7 +185,7 @@ Our old `handleDragEnd` logic for dnd context, now will not work properly, so le
 
 Everything else can stay the same as with simple implementation, except we will change one little detail in the `handleDragEnd` function. 
 
-We will use `move` method from `useFieldArray` and replace it old rearrange logic:
+We will use the `move` method from `useFieldArray` and replace it with old rearrange logic:
 
 Replace this:
 ```tsx
@@ -200,10 +200,10 @@ With this:
 move(oldIndex, newIndex);
 ```
 
-Now, the products can be grapped and reordered properly.
+Now, the products can be grabbed and reordered properly.
 
 ### Optional additions
-Optionally, you can also add a few methods that can move a product up or down one time when clicked on certain buttons.
+Optionally, you can also add a few methods that can move a product up or down one time when clicking on certain buttons.
 
 ```tsx
 const moveFieldUp = (index: number) => {
@@ -220,7 +220,6 @@ const moveFieldDown = (index: number) => {
 Now, you need to pass these functions and the index to the `SingleItem` component.
 
 ```tsx
-{
     products.map((product, index) => (
         <SingleItem 
             key={product.id} 
@@ -230,7 +229,6 @@ Now, you need to pass these functions and the index to the `SingleItem` componen
             moveFieldDown={moveFieldDown}
         />
     ))
-}
 ```
 
 Next, you accept these new properties in `SingleItem` and place them accordingly:
@@ -252,5 +250,5 @@ const SingleItem = ({product, index, moveFieldUp, moveFieldDown}) => {
 }
 ```
 
-Final implementation looks like this:
-<CustomImage src={"https://github.com/aliabb01/blogposts/blob/main/images/invoify_items_dnd.gif?raw=true"} alt="Items Drag and Drop"/>
+The final implementation looks like this:
+<CustomImage src={"https://raw.githubusercontent.com/aliabb01/blogposts/main/images/invoify_items_dnd.gif"} alt="Items Drag and Drop"/>
