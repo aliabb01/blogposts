@@ -220,7 +220,6 @@ const moveFieldDown = (index: number) => {
 Now, you need to pass these functions and the index to the `SingleItem` component.
 
 ```tsx
-    products.map((product, index) => (
         <SingleItem 
             key={product.id} 
             product={product}
@@ -228,7 +227,6 @@ Now, you need to pass these functions and the index to the `SingleItem` componen
             moveFieldUp={moveFieldUp}
             moveFieldDown={moveFieldDown}
         />
-    ))
 ```
 
 Next, you accept these new properties in `SingleItem` and place them accordingly:
