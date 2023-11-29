@@ -217,12 +217,7 @@ const moveFieldDown = (index: number) => {
     }
 };
 ```
-Now, you need to pass these functions and the index to the `SingleItem` component.
-
-```jsx
-<SingleItem key={product.id} product={product} index={index} moveFieldUp={moveFieldUp} moveFieldDown={moveFieldDown} />
-```
-
+Now, you need to pass the index and these functions to the `SingleItem` component.
 Next, you accept these new properties in `SingleItem` and place them accordingly:
 ```tsx
 const SingleItem = ({product, index, moveFieldUp, moveFieldDown}) => {
