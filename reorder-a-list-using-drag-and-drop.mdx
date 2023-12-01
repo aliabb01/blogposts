@@ -2,7 +2,7 @@
 title: "How To Build a Sortable List with Drag Handle in React Hook Form using Dnd-kit"
 date: "2023-11-28"
 description: "Learn how to create a sortable list with drag handles with React Hook Form using the Dnd-kit library."
-tags: ["React.js","React Hook Form","Dnd-kit"]
+tags: ["React.js","React-Hook-Form","Dnd-kit"]
 ---
 
 Dragging and dropping items is a common user interaction pattern that can greatly enhance the user experience in web applications. When building sortable lists with drag handles in React.js, the Dnd-kit library provides a powerful and flexible solution.
@@ -18,12 +18,14 @@ Dnd-kit is a modern drag-and-drop library for React, making it easy to implement
 npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
 ```
 ## Implementation
+
 ### Simple Implementation
 Let's assume we have 2 components: Items (array of products) and SingleItem. In the items component you map over the products and put the single item inside like this:
 
 ```tsx
 const Items = () => {
-    const products = fetchProducts();
+    const [products, setProducts] = useState(/* Some products here */)
+    
     return (
         {
             products.map((product, index) => (
@@ -211,6 +213,7 @@ const moveFieldUp = (index: number) => {
         move(index, index - 1);
     }
 };
+
 const moveFieldDown = (index: number) => {
     if (index < fields.length - 1) {
         move(index, index + 1);
